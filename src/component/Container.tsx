@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components/macro";
+import ImageSlideShow from "./ImageSlideShow";
 
 const FlexWrapper = styled.div`
   display:flex;
@@ -39,14 +40,15 @@ const Thumbnail = styled.img`
 
 const Company = styled.h3`
   color:var(--orange);
+  text-align:left;
 `;
 
 const Header = styled.h1`
-
+  text-align:left;
 `;
 
 const Description = styled.h5`
-
+  text-align:start;
 `;
 
 const PriceWrapper = styled.div`
@@ -54,25 +56,28 @@ const PriceWrapper = styled.div`
 `;
 
 const Price = styled.h3`
-
+  text-align:left;
 `;
 
 const Discount = styled.div`
   background:var(--pale-orange);
   color:var(--orange);
   font-size:13px;
+  text-align:left;
 `;
 
 const OriPrice = styled.div`
   color:var(--dark-grayish-blue);
   text-decoration: line-through;
   text-decoration-color:var(--dark-grayish-blue);
+  text-align:left;
 `;
 
 const SquareBox = styled.div`
   border:1px solid var(--dark-grayish-blue);
   width:3vw;
   height:6vh;
+  background-size: 100%;
 `;
 
 const BtnSubmit = styled.div`
@@ -93,6 +98,10 @@ function Container() {
 
   const [index, setIndex] = useState(0);
 
+  const handleThumbnailClick = (thumbnail: number) => {
+    setIndex(thumbnail);
+  }
+
   let photo = "";
   if (index === 0) {
     photo = "static/image-product-1.jpg";
@@ -100,7 +109,7 @@ function Container() {
   else if (index === 1) {
     photo = "static/image-product-2.jpg";
   }
-  else if (index === 1) {
+  else if (index === 2) {
     photo = "static/image-product-3.jpg";
   }
   else {
@@ -110,13 +119,9 @@ function Container() {
   return (
     <FlexWrapper>
       <FlexContainer>
-        <MainImg src={photo} />
-        <InnerFlexContainer>
-          <Thumbnail src="static/image-product-1-thumbnail.jpg" onClick={() => setIndex(0)}></Thumbnail>
-          <Thumbnail src="static/image-product-2-thumbnail.jpg" onClick={() => setIndex(1)}></Thumbnail>
-          <Thumbnail src="static/image-product-3-thumbnail.jpg" onClick={() => setIndex(2)}></Thumbnail>
-          <Thumbnail src="static/image-product-4-thumbnail.jpg" onClick={() => setIndex(3)}></Thumbnail>
-        </InnerFlexContainer>
+        <ImageSlideShow
+          handleThumbnailClick={handleThumbnailClick}
+          photo={photo} />
       </FlexContainer>
       <FlexContainer>
         <Company>SNEAKER COMPANY</Company>
@@ -129,13 +134,15 @@ function Container() {
         <OriPrice>$250.00</OriPrice>
 
         <FlexWrapper>
-          <SquareBox style={{ background: "static/icon-minus.svg" }}></SquareBox>
-          <SquareBox>0</SquareBox>
-          <SquareBox style={{ background: "static/icon-plus.svg" }}></SquareBox>
+          <SquareBox style={{ backgroundImage: "static/icon-minus.svg", backgroundRepeat: "no-repeat", backgroundPosition: "center center" }} onClick={() => index - 1}></SquareBox>
+          <SquareBox>{index}</SquareBox>
+          <SquareBox style={{ backgroundImage: "static/icon-plus.svg" }} onClick={() => index + 1}></SquareBox>
 
           <BtnSubmit>
-            <IconCart />
-            <BtnLabel>Add to Cart</BtnLabel>
+            <FlexWrapper>
+              <IconCart />
+              <BtnLabel>Add to Cart</BtnLabel>
+            </FlexWrapper>
           </BtnSubmit>
         </FlexWrapper>
       </FlexContainer >
