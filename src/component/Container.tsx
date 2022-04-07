@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components/macro";
 import ImageSlideShow from "./ImageSlideShow";
+import AddCartBtn from "./AddCartBtn";
+import QuantityEditor from "./QuantityEditor";
 
 const FlexWrapper = styled.div`
   display:flex;
@@ -10,7 +12,7 @@ const FlexContainer = styled.div`
   flex:50%;
   display:flex;
   flex-direction:column;
-  align-items:center;
+  // align-items:center;
   gap:20px;
 `;
 
@@ -41,29 +43,43 @@ const Thumbnail = styled.img`
 const Company = styled.h3`
   color:var(--orange);
   text-align:left;
+  margin:200px 0 0 0 ;
 `;
 
 const Header = styled.h1`
   text-align:left;
+  margin:0 380px 0 0;
+  font-size:55px;
 `;
 
 const Description = styled.h5`
   text-align:start;
+  margin:0;
+  font-size:20px;
+  color:var(--dark-grayish-blue);
+  margin:0 400px 0 0;
 `;
 
 const PriceWrapper = styled.div`
   display:flex;
+  align-items:center;
 `;
 
 const Price = styled.h3`
   text-align:left;
+  font-size:35px;
+  margin:0;
 `;
 
 const Discount = styled.div`
   background:var(--pale-orange);
   color:var(--orange);
-  font-size:13px;
+  font-size:15px;
   text-align:left;
+  margin-left: 20px;
+  font-weight: bolder;
+  padding: 2px 5px;
+  border-radius:10%;
 `;
 
 const OriPrice = styled.div`
@@ -73,11 +89,11 @@ const OriPrice = styled.div`
   text-align:left;
 `;
 
-const SquareBox = styled.div`
+const RecBox = styled.div`
   border:1px solid var(--dark-grayish-blue);
-  width:3vw;
+  width:6vw;
   height:6vh;
-  background-size: 100%;
+  // background:url(static/icon-minus.svg);
 `;
 
 const BtnSubmit = styled.div`
@@ -94,9 +110,16 @@ const BtnLabel = styled.h3`
   color:var(--white);
 `;
 
+const QuantityFlexWrapper = styled.div`
+  display:flex;
+  gap:100px;
+`;
+
 function Container() {
 
   const [index, setIndex] = useState(0);
+
+  const [num, setNum] = useState(0);
 
   const handleThumbnailClick = (thumbnail: number) => {
     setIndex(thumbnail);
@@ -125,26 +148,29 @@ function Container() {
       </FlexContainer>
       <FlexContainer>
         <Company>SNEAKER COMPANY</Company>
-        <Header>Full Limited Edition Sneakers</Header>
-        <Description>The low profile </Description>
+        <Header>Fall Limited Edition Sneakers</Header>
+        <Description>The low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they'll withstand everything the weather can offer. </Description>
         <PriceWrapper>
           <Price>$125.00</Price>
           <Discount>50%</Discount>
         </PriceWrapper>
         <OriPrice>$250.00</OriPrice>
 
-        <FlexWrapper>
-          <SquareBox style={{ backgroundImage: "static/icon-minus.svg", backgroundRepeat: "no-repeat", backgroundPosition: "center center" }} onClick={() => index - 1}></SquareBox>
-          <SquareBox>{index}</SquareBox>
-          <SquareBox style={{ backgroundImage: "static/icon-plus.svg" }} onClick={() => index + 1}></SquareBox>
+        <QuantityFlexWrapper>
+          {/* <SquareBox style={{ backgroundImage: "static/icon-minus.svg" }} onClick={() => index - 1}></SquareBox> */}
+          {/* <RecBox>
+            {num}
+          </RecBox> */}
+          <QuantityEditor />
 
-          <BtnSubmit>
+          {/* <BtnSubmit>
             <FlexWrapper>
               <IconCart />
               <BtnLabel>Add to Cart</BtnLabel>
             </FlexWrapper>
-          </BtnSubmit>
-        </FlexWrapper>
+          </BtnSubmit> */}
+          <AddCartBtn />
+        </QuantityFlexWrapper>
       </FlexContainer >
 
     </FlexWrapper >
