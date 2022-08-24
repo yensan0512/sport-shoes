@@ -11,18 +11,18 @@ const QttSelectorContainer = styled.div`
 
   display: flex;
   align-items: center;
-  
+
   background: var(--light-grayish-blue);
 
   button {
     border: none;
 
     background: transparent;
-    cursor:pointer;
+    cursor: pointer;
   }
 
   button:first-child {
-    padding-bottom: 0.5rem
+    padding-bottom: 0.5rem;
   }
 
   input {
@@ -36,20 +36,36 @@ const QttSelectorContainer = styled.div`
 
     background: transparent;
   }
-`
+`;
 
-function QuantityEditor() {
+function QuantityEditor({
+  itemInCart,
+  setItemInCart,
+}: {
+  itemInCart: number;
+  setItemInCart: (n: number) => void;
+}) {
+  const handleMinus = () => {
+    let number = --itemInCart;
+    if (number < 0) number = 0;
+
+    setItemInCart(number);
+  };
+
+  const handlePlus = () => {
+    setItemInCart(++itemInCart);
+  };
 
   return (
     <QttSelectorContainer>
-      <button>
+      <button onClick={handleMinus}>
         <img src="static/icon-minus.svg" alt="" />
       </button>
-      <input type="text" value="0" />
-      <button>
+      <input type="text" value={itemInCart} />
+      <button onClick={handlePlus}>
         <img src="static/icon-plus.svg" alt="" />
       </button>
     </QttSelectorContainer>
   );
 }
-export default QuantityEditor
+export default QuantityEditor;

@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components/macro";
 
 const ContainerBtnAddCart = styled.div`
-width: 30%;
-height:auto;
+  width: 30%;
+  height: auto;
   //margin-top: 0.8rem;
-  
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,19 +26,22 @@ height:auto;
   }
 
   img {
-    width: 1.0rem;
+    width: 1rem;
     fill: #fff;
+  }
+
+  &:hover {
+    cursor: pointer;
   }
 `;
 
-function AddCartBtn() {
+function AddCartBtn({ Initiation }: { Initiation: () => void }) {
   return (
-    <ContainerBtnAddCart >
+    <ContainerBtnAddCart onClick={Initiation}>
       <img src="static/icon-cart.svg" alt="cart" />
       <span>Add to card</span>
     </ContainerBtnAddCart>
   );
-
 }
 
-export default AddCartBtn
+export default AddCartBtn;
